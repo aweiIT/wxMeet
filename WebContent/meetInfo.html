@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.mi_back {
+	margin-bottom: 20px;
+	width: 75px;
+	text-align: center;
+	background-color: #015293;
+	color: white;
+	border-radius: 6px;
+	padding: 6px;
+}
+</style>
+</head>
+<body>
+	<div class="mi_body">
+		<div class="mi_back" onclick="history.back()">返回</div>
+		<div class="mi_head" id="methem"></div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">会议状态</span>
+				<div class="mi_input" id="status"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议室</span>
+				<div class="mi_input" id="room"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议日期</span>
+				<div class="mi_input" id="date"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议时间</span> <input type="text" id="startTime"
+					readonly="readonly"></input><span class="mi_zhi">至</span><input
+					type="text" id="endTime" readonly="readonly"></input>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">发起人</span>
+				<div class="mi_input" id="set"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">被邀参会人</span>
+				<div class="mi_input" id="join"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议说明</span>
+				<div class="mi_input" id="desc"></div>
+				<div class="all_clear"></div>
+			</div>
+		</div>
+		<div class="mi_head">
+			会议文件
+			<div style="clear: both"></div>
+		</div>
+		<div class="mi_file">
+			<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
+		</div>
+	</div>
+</body>
+<script id="file_t" type="text/x-jquery-tmpl">
+<div class="mi_fileItem">
+<a href="${nowUrl}"><img src="img/file_${type}.png" class="mi_fileImg"></a>
+<div>${$item.getName(name)}</div>
+<div class="all_clear"></div>
+</div>
+</script>
+<script src="laydate/laydate.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script>
+	function init() {
+		var meet_info = JSON.parse(localStorage.meet_info);
+		setData(meet_info);
+	}
+	init();
+	function setData(param) {
+		$("#room").text(param.room);
+		$("#methem").text(param.methem);
+		$("#date").text(param.date);
+		$("#startTime").val(param.startTime);
+		$("#endTime").val(param.endTime);
+		$("#join").text(param.join);
+		$("#desc").text(param.desc)
+		var s_file = param.file;
+		for ( var k in s_file) {
+			$("#file_t").tmpl(s_file[k], {
+				getName : function(name) {
+					if (name.length > 5) {
+						return name.slice(0, 5) + "...";
+					}
+					return name;
+				}
+			}).insertBefore($("#mi_fileClear"));
+		}
+		var s_room = param.s_room;
+		var roomStr = "";
+		for ( var k in s_room) {
+			roomStr += s_room[k].name + ",";
+		}
+		$("#room").text(roomStr);
+		var s_user = param.s_user;
+		var userStr = "";
+		for ( var k in s_user) {
+			userStr += s_user[k].depart + "  " + s_user[k].name + ",";
+		}
+		$("#join").text(userStr);
+	}
+</script>
+</html>

@@ -1,0 +1,274 @@
+::-webkit-scrollbar {
+	width: 0px;
+	height: 0px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	font-family: "Arial", "Microsoft YaHei", "黑体", "宋体", sans-serif;
+}
+
+.i_head {
+	width: 100%;
+	height: 50px;
+	background-color: #015293;
+}
+
+.i_body {
+	position: absolute;
+	top: 50px;
+	bottom: 0px;
+	width: 100%;
+	min-width: 300px;
+	min-height: 200px;
+}
+
+.i_nav {
+	width: 100px;
+	background-color: #F1F5F8;
+	position: absolute;
+	height: 100%;
+	float: left;
+	max-height: 100%;
+	overflow-y:scroll; 
+}
+
+.i_nav_top {
+	position: relative;
+	width: 100%;
+	padding-top:20%;
+}
+
+.i_main {
+	top: 0px;
+	background-color: white;
+	position: absolute;
+	right: 0;
+	left: 100px;
+	padding: 2% 7%;
+	bottom: 0;
+	overflow-y: scroll
+}
+
+.i_navTopMain {
+	vertical-align: middle;
+	display: table-cell;
+	width: 100%;
+}
+
+.i_nav_Icon {
+	text-align: center;
+	padding:15% 0;
+}
+
+.i_navImg {
+	width: 25px;
+}
+
+.i_nav_bottom {
+	height: 20%;
+	background-color: #E5E8ED;
+	text-align: center;
+	display: table;
+	width: 100%;
+}
+
+.all_clear {
+	clear: both
+}
+
+.m_list {
+	height: 85%
+}
+
+.m_item {
+	margin: 10px 0;
+}
+
+.m_main {
+	
+}
+
+.m_head {
+	margin-bottom: 10px;
+}
+
+.m_subItem {
+	border: 1px solid #F0F0F0;
+	border-radius: 5px;
+	margin: 10px 0;
+	position: relative;
+}
+
+.m_sub {
+	padding: 7px 10px;
+	margin-top: 3px;
+}
+
+.m_subFirst {
+	background-color: #FCF3F4;
+}
+
+.m_title {
+	font-size: 14px;
+	font-weight: 600;
+	margin: 5px 10px;
+}
+
+.m_time {
+	float: left;
+}
+
+.m_state {
+	float: right;
+	color: red;
+}
+
+.m_subTitle {
+	width: 100px;
+	text-align: right;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+select, option {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: none;
+	padding: 2px;
+}
+
+.m_select, .m_textGroup {
+	border: 1px solid #c1c1c1;
+	display: inline-block;
+}
+
+.m_textGroup {
+	height: 20px;
+	padding: 3px 0 6px 0;
+	position: relative;
+	top: 3px;
+}
+
+select {
+	border-width: 0px;
+	margin-right: 5px;
+	outline: none
+}
+
+.m_text {
+	height: 20px;
+	width: 150px;
+	display: inline-block;
+	margin-left: 10px;
+	overflow: hidden;
+	outline: none
+}
+
+.mi_body {
+	margin: 0 auto;
+}
+
+.mi_file {
+	padding: 15px 0;
+}
+
+.mi_head {
+	font-size: 16px;
+	font-weight: 600;
+	margin-top: 15px;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 5px;
+}
+
+.mi_item {
+	margin-top: 15px;
+	border-bottom: 1px solid #e1e1e1;
+	position: relative;
+	padding-right: 50px;
+}
+
+.mi_name {
+	width: 10%;
+	display: inline-block;
+	float: left;
+	min-width: 80px;
+}
+
+.mi_fileItem {
+	float: left;
+	margin-right: 25px;
+	text-align: center;
+}
+
+input[type='text'] {
+	border-width: 0px;
+	margin-right: 5px;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: none;
+	display: inline-block;
+}
+
+.mi_del {
+	color: blue;
+	margin: 5px 0;
+}
+
+.mi_bottom {
+	margin-left: 30%;
+	margin-top: 20px;
+}
+
+.mi_btn {
+	background-color: #015293;
+	color: white;
+	padding: 6px 10px;
+	border-radius: 5px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+.mi_con {
+	color: gray;
+	font-size: 12px;
+}
+
+.mi_addFile {
+	float: right;
+	background-color: #279AD9;
+	color: white;
+	padding: 5px 10px;
+	border-radius: 5px;
+	font-size: 12px;
+}
+
+.mi_right_ico {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+}
+
+.mi_zhi {
+	margin-right: 20px;
+}
+
+.mi_input {
+	float: left;
+	display: block;
+	width: auto;
+	min-width: 40px;
+	min-height: 20px;
+	line-height: 20px;
+	word-wrap: break-word;
+	max-width: 85%;
+}
+
+.mi_fileImg {
+	width: 55px;
+}

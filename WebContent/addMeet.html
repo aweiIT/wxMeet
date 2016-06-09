@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+</style>
+</head>
+<body>
+	<div class="mi_body">
+		<div class="mi_head">填写会议基本信息</div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">会议室</span>
+				<div class="mi_input" str="选择会议室" id="room"></div>
+				<img class="mi_right_ico" src="img/right_ico.png" width="8px"
+					onclick="selectRoom()">
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议主题</span>
+				<div class="mi_input" contenteditable="true" str="填写会议主题"
+					id="methem"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议日期</span><input type="text"
+					class="laydate-icon" id="date" placeholder="yyyy-MM-dd"></input>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议时间</span> <input type="text"
+					placeholder="开始时间" id="startTime"></input><span class="mi_zhi">至</span><input
+					type="text" placeholder="结束时间" id="endTime"></input>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">被邀参会人</span>
+				<div class="mi_input" contenteditable="true" str="选择参会人" id="join"></div>
+				<img class="mi_right_ico" src="img/add_ico.png" width="15px" onclick="addUser()">
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议说明</span>
+				<div class="mi_input" contenteditable="true" str="填写会议说明" id="desc"></div>
+				<div class="all_clear"></div>
+			</div>
+		</div>
+		<div class="mi_head">
+			会议文件<span class="mi_addFile" onclick="addFile()">添加会议文件</span>
+			<div style="clear: both"></div>
+		</div>
+		<div class="mi_file">
+			<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
+		</div>
+		<div class="mi_bottom">
+			<span class="mi_save mi_btn" onclick="saveMeet()">保存草稿</span> <span class="mi_send mi_btn">发布会议</span>
+			<span class="mi_con">发布会议，同时向参会人员发布通知</span>
+		</div>
+	</div>
+</body>
+<script id="file_t" type="text/x-jquery-tmpl">
+<div class="mi_fileItem">
+<img src="img/file_${type}.png" class="mi_fileImg">
+<div>${$item.getName(name)}</div>
+<div class="mi_del">删除</div>
+<div class="all_clear"></div>
+</div>
+</script>
+<script src="laydate/laydate.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script src="js/addMeet.js"></script>
+</html>
