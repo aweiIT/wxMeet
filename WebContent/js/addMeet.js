@@ -1,9 +1,6 @@
 function back() {
 	$(".i_main").load("meetList.html?id=5");
 }
-laydate({
-	elem : '#date'
-})
 $(".mi_input").focus(function() {
 	var val = $(this).text();
 	if (val && val == $(this).attr("str")) {
@@ -53,6 +50,17 @@ function setData() {
 }
 init();
 function init() {
+	for (var i = 0; i < 24; i++) {
+		var n = i;
+		if (n < 10)
+			n = "0" + n + ":00";
+		else {
+			n = n + ":00";
+		}
+		$("<option/>").attr("value", n).text(n).appendTo($("#startTime"));
+		$("<option/>").attr("value", n).text(n).appendTo($("#endTime"));
+	}
+
 	var type = $.getUrlVar("type");
 	if (type == "back") {
 		setData();
@@ -107,5 +115,4 @@ function saveMeet() {
 			alert("保存成功");
 		}
 	});
-
 }

@@ -107,11 +107,11 @@ body {
 }
 
 .d_check {
-	position: absolute;
-	right: 45px;
+	margin-right: 15px;
 	width: 18px;
 	height: 18px;
 	display: none;
+	float:left
 }
 
 .d_uItem {
@@ -153,18 +153,22 @@ body {
 <script id="depart_t" type="text/x-jquery-tmpl">
 <div class="d_item">
 <div class="d_depart">
-<span class="d_name">${departName}</span>
-<span class="d_num">${userNum}</span>
-<img class="d_openImg" src="img/right_ico.png" onclick="toggleUser(this,'${departid}')">
 <input type="checkbox" class="d_check" id="${departid}" pType="p_check"></input>
+<div style="float:left" onclick="toggleUser(this,'${departid}')">
+<span class="d_name" >${departName}</span>
+<!--<span class="d_num">${userNum}</span>-->
+<img class="d_openImg" src="img/right_ico.png" >
+</div>
 <div class="all_clear"></div>
 </div>
+
 {{each(index,obj) userList}}
 <div class="d_uItem ${obj.departid}" onclick="loadUser('${obj.userid}',this)">
 <span class="d_uName">${obj.name}<input type="checkbox" class="d_check" urole=${obj.role} uid=${obj.userid} uname=${obj.name} udepart=${obj.departName} udepartid=${obj.departid}></input></span>
 <div class="all_clear"></div>
 </div>
 {{/each}}
+<div class="all_clear"></div>
 </div>
 
 </script>
@@ -179,6 +183,7 @@ body {
 	function init(param) {
 		if (type == "select") {
 			$(".f_back").css("display", "inline-block");
+			$(".r_add").hide();
 		}
 
 		$("#f_main").children().remove();
@@ -263,6 +268,8 @@ body {
 		location.href = "addMeet.html?type=back";
 	}
 	function loadUser(id, e) {
+		if (type == "select")
+			return;
 		var param = {
 			name : $(e).find(".d_check").attr("uname"),
 			depart : $(e).find(".d_check").attr("udepart"),

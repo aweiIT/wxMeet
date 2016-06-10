@@ -132,15 +132,18 @@ body {
 	function init(param) {
 		if (type == "select") {
 			$(".f_back").css("display", "inline-block");
+			$(".f_headUp").hide();
 		}
 		$("#f_main").children().remove();
 		ajaxPost(param, "fileList.do", function(data) {
 			$("#file_t").tmpl(data).appendTo($("#f_main"));
-			if (type == "select")
+			if (type == "select") {
 				$(".f_item").click(function() {
 					$(this).toggleClass("f_selectItem");
 					$(this).children(".f_check").toggle();
 				});
+				$(".f_del").hide();
+			}
 		})
 	}
 	init({});

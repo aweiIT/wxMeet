@@ -27,14 +27,25 @@
 				<div class="all_clear"></div>
 			</div>
 			<div class="mi_item">
-				<span class="mi_name">会议日期</span><input type="text"
-					class="laydate-icon" id="date" placeholder="yyyy-MM-dd"></input>
+				<span class="mi_name">会议日期</span>
+				<select id="date">
+				<option value="2016-06-09">2016-06-09</option>
+				<option value="2016-06-10">2016-06-10</option>
+				<option value="2016-06-11">2016-06-11</option>
+				<option value="2016-06-12">2016-06-12</option>
+				<option value="2016-06-13">2016-06-13</option>
+				<option value="2016-06-14">2016-06-14</option>
+				</select>
+				<!--  <input type="text"
+					class="laydate-icon" id="date" placeholder="yyyy-MM-dd"></input>-->
 				<div class="all_clear"></div>
 			</div>
 			<div class="mi_item">
-				<span class="mi_name">会议时间</span> <input type="text"
-					placeholder="开始时间" id="startTime"></input><span class="mi_zhi">至</span><input
-					type="text" placeholder="结束时间" id="endTime"></input>
+				<span class="mi_name">会议时间</span> 
+				<select id="startTime">
+				</select>
+				<span class="mi_zhi">至</span><select id="endTime">
+				</select> 
 				<div class="all_clear"></div>
 			</div>
 			<div class="mi_item">
@@ -70,7 +81,6 @@
 <div class="all_clear"></div>
 </div>
 </script>
-<script src="laydate/laydate.js"></script>
 <script src="js/jquery.js"></script>
 <script src="js/jquery.tmpl.js"></script>
 <script src="js/base.js"></script>
