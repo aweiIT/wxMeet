@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.mi_back {
+	width: 75px;
+	text-align: center;
+	background-color: #015293;
+	color: white;
+	border-radius: 5px;
+	padding: 5px;
+	display: inline-block;
+	margin-right: 10px;
+}
+</style>
+</head>
+<body>
+	<div class="i_head">
+		<span class="i_head_center">会议助手</span>
+	</div>
+	<div class="i_body">
+		<div class="i_nav">
+			<div class="i_nav_top">
+				<div class="i_nav_Icon">
+					<img src="img/i_allMeet_1.png" class="i_navImg"
+						onclick="loadPage('index.html')">
+					<div>全部会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_0.png" class="i_navImg"
+						onclick="loadPage('myMeet.html')">
+					<div>我的会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('fileList.html')">
+					<div>文件管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('roomList.html')">
+					<div>会议室管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('userList.html')">
+					<div>用户管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('addMeet.html')">
+					<div>发起会议</div>
+				</div>
+			</div>
+		</div>
+		<div class="i_main">
+			<div class="mi_body">
+				<div class="m_head">
+					<span class="mi_back" onclick="history.back()">返回</span><span
+						onclick="updateMeet()" style="display: none" class="mi_back"
+						id="updateMeet">修改</span><span style="display: none"
+						onclick="sendMeet()" class="mi_back" id="sendMeet">发布会议</span>
+				</div>
+				<div class="mi_head" id="methem"></div>
+				<div class="mi_main">
+					<div class="mi_item">
+						<span class="mi_name">会议状态</span>
+						<div class="mi_input" id="status"></div>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议室</span>
+						<div class="mi_input" id="room"></div>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议日期</span>
+						<div class="mi_input" id="date"></div>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议时间</span> <input type="text"
+							id="startTime" readonly="readonly"></input><span class="mi_zhi">至</span><input
+							type="text" id="endTime" readonly="readonly"></input>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">被邀参会人</span>
+						<div class="mi_input" id="join"></div>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议说明</span>
+						<div class="mi_input" id="desc"></div>
+						<div class="all_clear"></div>
+					</div>
+				</div>
+				<div class="mi_head">
+					会议文件
+					<div style="clear: both"></div>
+				</div>
+				<div class="mi_file">
+					<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script id="file_t" type="text/x-jquery-tmpl">
+<div class="mi_fileItem">
+<a href="${nowUrl}"><img src="img/file_${type}.png" class="mi_fileImg"></a>
+<div class="mi_fileName">${$item.getName(name)}</div>
+<div class="all_clear"></div>
+</div>
+</script>
+<script src="laydate/laydate.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script>
+	function sendMeet() {
+		var meet_info = JSON.parse(localStorage.meet);
+		ajaxPost({
+			id : meet_info.id,
+			title : "会议通知",
+			subtitle : "您收到一个会议邀请通知",
+			user : meet_info.s_user,
+			type : "add"
+		}, "sendMeet.do", function(data) {
+			loadPage("myMeet.html");
+		})
+	}
+	function updateMeet() {
+		var meet_info = JSON.parse(localStorage.meet);
+		localStorage.s_file = JSON.stringify(meet_info.file);
+		localStorage.s_room = JSON.stringify(meet_info.s_room);
+		localStorage.s_user = JSON.stringify(meet_info.s_user);
+		loadPage("addMeet.html?type=back&id=" + meet_info.id);
+	}
+	function init() {
+		var meet_info = JSON.parse(localStorage.meet);
+		setData(meet_info);
+	}
+	init();
+	function setData(param) {
+		$("#methem").text(param.methem);
+		$("#date").text(param.date);
+		$("#startTime").val(param.startTime);
+		$("#endTime").val(param.endTime);
+		$("#join").text(param.join);
+		$("#desc").text(param.desc)
+		if (param.status == "draft") {
+			$("#sendMeet").css("display", "inline-block");
+		}
+		if (param.status == "draft" || param.status == "noRun") {
+			$("#updateMeet").css("display", "inline-block");
+		}
+		$("#status").text(getStatus(param.status));
+		var s_file = param.file;
+		for ( var k in s_file) {
+			$("#file_t").tmpl(s_file[k], {
+				getName : function(name) {
+					if (name.length > 5) {
+						return name.slice(0, 5) + "...";
+					}
+					return name;
+				}
+			}).insertBefore($("#mi_fileClear"));
+		}
+		var s_room = param.s_room;
+		$("#room").text(s_room.name);
+		var s_user = param.s_user;
+		var userStr = "";
+		for ( var k in s_user) {
+			userStr += s_user[k].depart + "  " + s_user[k].name + ",";
+		}
+		$("#join").text(userStr);
+	}
+	function getStatus(status) {
+		var staObj = {
+			draft : "草稿",
+			noRun : "未开始",
+			run : "进行中",
+			over : "已结束",
+			can : "已取消"
+		}
+		return staObj[status];
+	}
+</script>
+</html>

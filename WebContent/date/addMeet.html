@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-hu.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-de.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-es.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-fr.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-it.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-no.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-pt-BR.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-zh.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-nl.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-tr.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-ja.js"></script>
+<link href="dev/css/mobiscroll.core-2.6.2.css" rel="stylesheet" />
+<link href="dev/css/mobiscroll.animation-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.datetime-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.list-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.list-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.select-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.android-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.android-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.android-ics-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.android-ics-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.ios-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.ios-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.jqm-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.jqm-2.6.2.css" rel="stylesheet" />
+<link href="dev/css/mobiscroll.sense-ui-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.wp-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.wp-2.6.2.css" rel="stylesheet" />
+<style type="text/css">
+.mi_fileName {
+	margin: 3px 0;
+	line-height: 20px;
+}
+
+body {
+	padding: 0;
+	margin: 0;
+	font-family: arial, verdana, sans-serif;
+	font-size: 12px;
+	background: #ddd;
+}
+
+input, select {
+	width: 100%;
+	padding: 5px;
+	margin: 5px 0;
+	border: 1px solid #aaa;
+	box-sizing: border-box;
+	border-radius: 5px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-border-radius: 5px;
+}
+
+.header {
+	border: 1px solid #333;
+	background: #111;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px black;
+	background-image: linear-gradient(#3C3C3C, #111);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3C3C3C),
+		to(#111));
+	background-image: -moz-linear-gradient(#3C3C3C, #111);
+}
+
+.header h1 {
+	text-align: center;
+	font-size: 16px;
+	margin: .6em 0;
+	padding: 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.content {
+	padding: 15px;
+	background: #fff;
+}
+
+.car {
+	position: relative;
+	height: 100%;
+}
+
+.car img {
+	height: 28px;
+	display: block;
+	margin: 0 auto;
+}
+
+.car .img-cont {
+	width: 80px;
+	height: 28px;
+	text-align: center;
+	float: left;
+	position: relative;
+	top: 50%;
+	margin-top: -14px;
+}
+
+.car span {
+	float: left;
+}
+</style>
+</head>
+<body>
+	<div class="i_head">
+		<span class="i_head_center">会议助手</span>
+	</div>
+	<div class="i_body">
+		<div class="i_nav">
+			<div class="i_nav_top">
+				<div class="i_nav_Icon">
+					<img src="img/i_allMeet_1.png" class="i_navImg"
+						onclick="loadPage('index.html')">
+					<div>全部会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('myMeet.html')">
+					<div>我的会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('fileList.html')">
+					<div>文件管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('roomList.html')">
+					<div>会议室管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('userList.html')">
+					<div>用户管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_0.png" class="i_navImg"
+						onclick="loadPage('addMeet.html')">
+					<div>发起会议</div>
+				</div>
+			</div>
+		</div>
+		<div class="i_main">
+			<div class="mi_body">
+				<div class="m_head">
+					<span class="mi_back" onclick="history.back()">返回</span>
+				</div>
+				<div class="mi_head">填写会议基本信息</div>
+				<div class="mi_main">
+					<div class="mi_item">
+						<span class="mi_name">会议室</span>
+						<div class="mi_input" str="选择会议室" id="room"></div>
+						<img class="mi_right_ico" src="img/right_ico.png" width="8px"
+							onclick="selectRoom()">
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议主题</span>
+						<div class="mi_input" contenteditable="true" str="填写会议主题"
+							id="methem"></div>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议日期</span>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议时间</span> <span class="mi_zhi">至</span>
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">被邀参会人</span>
+						<div class="mi_input" contenteditable="true" str="选择参会人" id="join"></div>
+						<img class="mi_right_ico" src="img/add_ico.png" width="15px"
+							onclick="addUser()">
+						<div class="all_clear"></div>
+					</div>
+					<div class="mi_item">
+						<span class="mi_name">会议说明</span>
+						<div class="mi_input" contenteditable="true" str="填写会议说明"
+							id="desc"></div>
+						<div class="all_clear"></div>
+					</div>
+				</div>
+				<div class="mi_head">
+					会议文件<span class="mi_addFile" onclick="addFile()">添加会议文件</span>
+					<div style="clear: both"></div>
+				</div>
+				<div class="mi_file">
+					<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
+				</div>
+				<div class="mi_bottom">
+					<span class="mi_save mi_btn" onclick="saveMeet()">保存草稿</span> <span
+						class="mi_send mi_btn">发布会议</span> <span class="mi_con">发布会议，同时向参会人员发布通知</span>
+				</div>
+				<div class="header">
+					<h1>Mobiscroll</h1>
+				</div>
+
+				<div class="content">
+					<div id="demo_default" class="demos" style="width: 100px">
+						<label for="test_default">Click here to try</label> <input
+							type="text" name="test_default" id="test_default" /> <label
+							for="test_default2">Click here to try</label> <input type="text"
+							name="test_default" id="test_default2" /> <label
+							for="test_default3">Click here to try</label> <input type="text"
+							name="test_default" id="test_default3" />
+					</div>
+					<!--Html-->
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script id="file_t" type="text/x-jquery-tmpl">
+<div class="mi_fileItem">
+<img src="img/file_${type}.png" class="mi_fileImg">
+<div class="mi_fileName">${$item.getName(name)}</div>
+<div class="mi_del" onclick="delFile('${id}',this)">删除</div> 
+<div class="all_clear"></div>
+</div>
+</script>
+<script src="../js/jquery.tmpl.js"></script>
+<script src="../js/base.js"></script>
+<script src="../js/addMeet.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var curr = new Date().getFullYear();
+		var opt = {
+
+		}
+		opt.date = {
+			preset : 'date'
+		};
+		opt.time = {
+			preset : 'time'
+		};
+		opt.select = {
+			preset : 'select'
+		};
+		$('#test_default').val('').scroller('destroy').scroller(
+				$.extend(opt['date'], {
+					theme : "default",
+					mode : "scroller",
+					display : "Modal",
+					lang : "zh"
+				}));
+		$('#test_default2').val('').scroller('destroy').scroller(
+				$.extend(opt['time'], {
+					theme : "default",
+					mode : "scroller",
+					display : "Modal",
+					lang : "zh"
+				}));
+		$('#test_default3').val('').scroller('destroy').scroller(
+				$.extend(opt['time'], {
+					theme : "default",
+					mode : "scroller",
+					display : "Modal",
+					lang : "zh"
+				}));
+	});
+</script>
+</html>

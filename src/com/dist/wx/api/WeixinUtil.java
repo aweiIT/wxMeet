@@ -11,7 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.json.JSONObject;
-
+ 
  
 public class WeixinUtil {
     /** 
@@ -90,6 +90,27 @@ public class WeixinUtil {
 	}
 	
  	  
+	/**
+	 * 数据提交与请求通用方法
+	 * @param access_token 凭证
+	 * @param RequestMt 请求方式
+	 * @param RequestURL 请求地址
+	 * @param outstr 提交json数据
+	 * */
+    public static int PostMessage(String access_token ,String RequestMt , String RequestURL , String outstr){
+    	int result = 0;
+    	RequestURL = RequestURL.replace("ACCESS_TOKEN", access_token);
+    	System.out.println(outstr);
+    	JSONObject jsonobject = WeixinUtil.HttpRequest(RequestURL, RequestMt, outstr);
+    	 if (null != jsonobject) {  
+ 	        if (0 != jsonobject.getInt("errcode")) {  
+ 	            result = jsonobject.getInt("errcode");  
+ 	           // String error = String.format("操作失败 errcode:{} errmsg:{}", jsonobject.getInt("errcode"), jsonobject.getString("errmsg"));  
+ 	            System.out.println(jsonobject.toString()); 
+ 	        }  
+ 	    }
+    	return result;
+    }	
  
   	  
  

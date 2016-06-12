@@ -66,6 +66,7 @@ public class UpFileContro {
 	void writeFile(String path, String name, String str) {
 
 		String type = name.split("\\.")[1];
+		type = getType(type);
 		String fileName = DateUtil.getNow("yyyyMMddHHmmss") + new Random().nextInt(100) + "." + type;
 		FileOutputStream out = null;
 		try {
@@ -80,7 +81,7 @@ public class UpFileContro {
 		DbAgent dbcall = new DbAgent("onecooo", "wx_file");
 		JSONObject object = new JSONObject();
 		object.put("id", dbcall.getObjidstr("fileID"));
-		object.put("type", getType(type));
+		object.put("type", type);
 		object.put("name", name.split("\\.")[0]);
 		object.put("upDate", DateUtil.getNow("yyyy-MM-dd HH:mm"));
 		object.put("nowUrl", "/wxmeet/uploads/" + fileName);
@@ -88,16 +89,16 @@ public class UpFileContro {
 	}
 
 	String getType(String type) {
-		if (type.toLowerCase().contains("doc")) {
-			return "doc";
+		if (type.toLowerCase().contains("doc") || type.toLowerCase().contains("docx")) {
+			return "docx";
 		}
-		if (type.toLowerCase().contains("xls")) {
-			return "xls";
+		if (type.toLowerCase().contains("xls") || type.toLowerCase().contains("xlsx")) {
+			return "xlsx";
 		}
 		if (type.toLowerCase().contains("pdf")) {
 			return "pdf";
 		}
-		if (type.toLowerCase().contains("ppt")) {
+		if (type.toLowerCase().contains("ppt") || type.toLowerCase().contains("pptx")) {
 			return "ppt";
 		}
 		if (type.toLowerCase().contains("txt")) {

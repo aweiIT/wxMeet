@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.mi_head {
+	font-size: 18px;
+	font-weight: 600;
+	margin-top: 15px;
+	border-bottom: 1px solid #e1e1e1;
+	padding-bottom: 5px;
+}
+
+.mi_item {
+	margin-top: 15px;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+.mi_name {
+	width: 100px;
+	display: inline-block;
+}
+
+.mi_bottom {
+	margin-left: 100px;
+	margin-top: 20px;
+}
+
+.mi_btn {
+	background-color: #018AD2;
+	color: white;
+	width: 85px;
+	padding: 5px;
+	text-align: center;
+	border-radius: 5px;
+	margin-right: 10px;
+	display: inline-block;
+}
+
+input {
+	border-width: 0px;
+	margin-right: 5px;
+	outline: none;
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	background: none;
+}
+
+.mi_inputFile {
+	width: 85px;
+	display: inline-block;
+	text-align: center;
+	padding: 2px 5px;
+	position: relative;
+	right: 95px;
+	opacity: 0;
+}
+
+.f_showName {
+	margin-left: -20px;
+	color: black;
+}
+</style>
+</head>
+<body>
+	<div class="i_head">
+		<span class="i_head_center">会议助手</span>
+	</div>
+	<div class="i_body">
+		<div class="i_nav">
+			<div class="i_nav_top">
+				<div class="i_nav_Icon">
+					<img src="img/i_allMeet_1.png" class="i_navImg"
+						onclick="loadPage('index.html')">
+					<div>全部会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('myMeet.html')">
+					<div>我的会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_0.png" class="i_navImg"
+						onclick="loadPage('fileList.html')">
+					<div>文件管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('roomList.html')">
+					<div>会议室管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('userList.html')">
+					<div>用户管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('addMeet.html')">
+					<div>发起会议</div>
+				</div>
+			</div>
+		</div>
+		<div class="i_main">
+			<div class="mi_body">
+				<div class="mi_head">添加会议文件</div>
+				<div class="mi_main">
+					<div class="mi_item">
+						<span class="mi_name">上传文件</span><span class="mi_btn">上传本地文件</span><input
+							type="file" class="mi_inputFile " onchange="readFile(this)"
+							accept=".xls,.xlsx,.txt,.pdf,.doc,.docx,.ppt,.pptx"></input> <span
+							class="f_showName"></span>
+					</div>
+				</div>
+				<div class="mi_bottom">
+					<span class="mi_save mi_btn" onclick="save()">保存文件</span> <span
+						class="mi_send mi_btn" onclick="back()">返回</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/base.js"></script>
+<script>
+	function back() {
+		history.back();
+	}
+	var fileObj = {};
+	function readFile(obj) {
+		var file = obj.files[0];
+		$(".f_showName").text(file.name);
+		fileObj.name = file.name;
+		//判断类型是不是图片 
+		var reader = new FileReader();
+		reader.readAsDataURL(file);
+		reader.onload = function(e) {
+			fileObj.content = this.result.split("base64,")[1];
+		}
+	}
+	function save() {
+		ajaxPost(fileObj, "upFile.do", function(data) {
+			if (data.code == 1) {
+				loadPage("fileList.html");
+			}
+		})
+	}
+</script>
+</html>

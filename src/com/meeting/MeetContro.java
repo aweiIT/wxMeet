@@ -1,9 +1,8 @@
 package com.meeting;
 
-import java.awt.Checkbox;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
 import javax.servlet.http.HttpServletResponse;
 
 import org.aspectj.weaver.ast.Var;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.dist.wx.msg.send.SMessage;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBObject;
 import com.onecooo.core.data.mongodb.DbAgent;
@@ -38,6 +38,48 @@ public class MeetContro {
 		JSONArray list = Mongodbtools
 				.DBlist2JSONArray(dbcall.getDBColl().find(where).sort(new BasicDBObject("_id", -1)).toArray());
 		HttpUtil.write(response, list.toString());
+	}
+
+	@RequestMapping("getMeet.do")
+	public void getMeet(@RequestBody String param, HttpServletResponse response) {
+		JSONObject in = new JSONObject(param);
+		DbAgent dbcall = new DbAgent("onecooo", "wx_meet");
+		DBObject where = new BasicDBObject();
+		String id = in.optString("id");
+		JSONObject object = Mongodbtools.DBObject2JSON(dbcall.getDBColl().findOne(new BasicDBObject("id", id)));
+		DbAgent roomDB = new DbAgent("onecooo", "wx_room");
+		DBObject roomObj = roomDB.getDBColl()
+				.findOne(new BasicDBObject("id", object.optJSONObject("s_room").optString("id")));
+		object.put("address", roomObj.get("address"));
+		HttpUtil.write(response, object.toString());
+	}
+
+	@RequestMapping("sendMeet.do")
+	public void sendMeet(@RequestBody String param, HttpServletResponse response) {
+		JSONObject in = new JSONObject(param);
+		JSONObject user = in.optJSONObject("user");
+		Iterator users = user.keys();
+		String id = in.optString("id");
+		String type = in.optString("type");
+		while (users.hasNext()) {
+			String userID = (String) users.next();
+			SMessage.SendMessage(user.optJSONObject(userID).optString("wx_userid"), in.optString("title"),
+					in.optString("subtitle"),
+					"http://static.leiphone.com/uploads/2014/07/1404377084199.jpg?imageMogr2/format/jpg/quality/80",
+					"http://office.hxedu.tj.cn:8080/wxmeet/msg_addMeet.html?id=" + id + "&type=" + type);
+		}
+		DbAgent dbcall = new DbAgent("onecooo", "wx_meet");
+		String status = "";
+		if (type.equals("add")) {
+			status = "noRun";
+		}
+		if (type.equals("can")) {
+			status = "can";
+		}
+		dbcall.update(new BasicDBObject("id", id), new BasicDBObject("status", status));
+		JSONObject object = new JSONObject();
+		object.put("code", "1");
+		HttpUtil.write(response, object.toString());
 	}
 
 	@RequestMapping("saveMeet.do")
@@ -86,7 +128,15 @@ public class MeetContro {
 		}
 		where.put("date", dbcall.getin(dateList));
 		JSONArray list2 = Mongodbtools.DBlist2JSONArray(dbcall.getDBColl().find(where).toArray());
-
+		/**
+		 * DbAgent roomDB = new DbAgent("onecooo", "wx_room"); JSONArray
+		 * roomList =
+		 * Mongodbtools.DBlist2JSONArray(roomDB.getDBColl().find().toArray());
+		 * JSONObject roomObj = new JSONObject(); for (int i = 0; i <
+		 * roomList.length(); i++) {
+		 * roomObj.put(roomList.optJSONObject(i).optString("id"),
+		 * roomList.optJSONObject(i).optString("name")); }
+		 */
 		for (int i = 0; i < list2.length(); i++) {
 			JSONObject object = list2.optJSONObject(i);
 			JSONArray array = dateObj.optJSONArray(object.optString("date"));
@@ -102,7 +152,7 @@ public class MeetContro {
 		if (!status.equals("noRun") && !status.equals("draft")) {
 			return object;
 		}
-		
+
 		String startTime = object.optString("date") + " " + object.optString("startTime");
 		String entTime = object.optString("date") + " " + object.optString("endTime");
 		DateUtil.String2Date(startTime, "");
@@ -137,5 +187,35 @@ public class MeetContro {
 				dbcall.update(new BasicDBObject("id", idString), new BasicDBObject("status", statusString));
 			}
 		}).start();
+	}
+
+	@RequestMapping("checkMeetTime.do")
+	public void checkMeetTime(@RequestBody String param, HttpServletResponse response) {
+		JSONObject in = new JSONObject(param);
+		DbAgent dbcall = new DbAgent("onecooo", "wx_meet");
+		DBObject where = new BasicDBObject();
+		where.put("s_room.id", in.optString("roomID"));
+		where.put("date", in.optString("date"));
+		String start = in.optString("startTime");
+		String end = in.optString("endTime");
+		JSONArray list = Mongodbtools.DBlist2JSONArray(dbcall.getDBColl().find(where).toArray());
+		JSONObject msg = new JSONObject();
+		msg.put("code", "1");
+		for (int i = 0; i < list.length(); i++) {
+			JSONObject object = list.optJSONObject(i);
+			if (object.optString("status").equals("can") || object.optString("status").equals("over"))
+				continue;// 结束或者取消的状态
+			String startTime = object.optString("startTime");
+			String endTime = object.optString("endTime");
+			if (start.compareTo(startTime) > 0 && start.compareTo(endTime) < 0) {
+				// 在使用状态
+				msg.put("code", "-1");
+			}
+			if (end.compareTo(startTime) > 0 && end.compareTo(endTime) < 0) {
+				// 在使用状态
+				msg.put("code", "-1");
+			}
+		}
+		HttpUtil.write(response, msg.toString());
 	}
 }

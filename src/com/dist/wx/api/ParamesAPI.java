@@ -11,7 +11,7 @@ public class ParamesAPI {
 	 //你的企业号ID
 	public static String corpId = "wxe612f9b8a5a4f286";
 	// 管理组的凭证密钥，每个secret代表了对应用、通讯录、接口的不同权限；不同的管理组拥有不同的secret
-	public static String corpsecret = "sV-_dcbR_edv1nRcxrh7VBxJHNOuxBzp3VyaC7P8X7Te6MYKrJRQynSYHWWtlwe5";
+	public static String corpsecret = "oc1AWeOaB1pKEN-qA1Y-PkPgUy18ZFRvDYm_ePgvsZlWRgTqzo-lOXnCvalE-UdX";
 	// OAuth2 回调地址
 	public static String REDIRECT_URI = "";
 }

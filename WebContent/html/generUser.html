@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.i_head_center {
+	display: block;
+	font-size: 18px;
+	color: white;
+	width: 80px;
+	margin: 0 auto;
+	position: relative;
+	top: 14px;
+	font-weight: 600;
+}
+
+.i_iframe {
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+</style>
+</head>
+<body>
+	<div class="i_head">
+		<span class="i_head_center">会议助手</span>
+	</div>
+	<div class="i_body">
+		<div class="i_nav">
+			<div class="i_nav_top">
+				<div class="i_navTopMain">
+					<div class="i_nav_Icon">
+						<img src="img/i_allMeet_1.png" class="i_navImg"
+							onclick="loadPage('meetList')">
+						<div>全部会议</div>
+					</div>
+					<div class="i_nav_Icon">
+						<img src="img/i_myMeet_1.png" class="i_navImg"
+							onclick="loadPage('myMeet')">
+						<div>我的会议</div>
+					</div>
+					<div class="i_nav_Icon">
+						<img src="img/i_fileBg_1.png" class="i_navImg"
+							onclick="loadPage('userList')">
+						<div>文件管理</div>
+					</div>
+				</div>
+			</div>
+			<div class="i_nav_bottom">
+				<div class="i_navTopMain">
+					<div class="i_nav_Icon">
+						<img src="img/i_startMeet_1.png" class="i_navImg"
+							onclick="loadPage('addMeet')">
+						<div>发起会议</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="i_main">
+			<iframe id="frame" class="i_iframe"></iframe>
+		</div>
+		<div class="all_clear"></div>
+	</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/base.js"></script>
+<script>
+	$(function() {
+		$(".i_nav_Icon :eq(0)").children("img").trigger("click");
+		//$("#frame").attr("src",
+		//		"meetList.html?id=" + Math.floor(Math.random() * 100));
+	})
+	function loadPage(pageStr, e) {
+		var s_str = $(".i_select").attr("src");
+		if (s_str) {
+			$(".i_select").attr("src", s_str.slice(0, -5) + "1.png");
+		}
+		$(".i_select").removeClass("i_select");
+		$(e).addClass("i_select");
+		var str = $(e).attr("src");
+		$(e).attr("src", str.slice(0, -5) + "0.png");
+		$("#frame").attr("src",
+				pageStr + ".html?id=" + Math.floor(Math.random() * 100))
+	}
+</script>
+</html>

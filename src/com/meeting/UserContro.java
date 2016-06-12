@@ -23,8 +23,12 @@ public class UserContro {
 		DbAgent dbcall = new DbAgent("onecooo", "wx_user");
 		DBObject where = new BasicDBObject();
 		String role = in.optString("role");
+		String userID = in.optString("userID");
 		if (!role.equals("")) {
 			where.put("role", role);
+		}
+		if (!userID.equals("")) {
+			where.put("wx_userid", userID);
 		}
 		if (!in.optString("name").equals(""))
 			where.put("name", dbcall.getLikeStr(in.optString("name")));

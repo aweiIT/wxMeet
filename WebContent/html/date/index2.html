@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+<title>Mobiscroll</title>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-hu.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-de.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-es.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-fr.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-it.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-no.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-pt-BR.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-zh.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-nl.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-tr.js"></script>
+<script src="dev/js/mobiscroll.core-2.6.2-ja.js"></script>
+<link href="dev/css/mobiscroll.core-2.6.2.css" rel="stylesheet" />
+<link href="dev/css/mobiscroll.animation-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.datetime-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.list-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.list-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.select-2.6.2.js"></script>
+<script src="dev/js/mobiscroll.android-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.android-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.android-ics-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.android-ics-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.ios-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.ios-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.jqm-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.jqm-2.6.2.css" rel="stylesheet" />
+<link href="dev/css/mobiscroll.sense-ui-2.6.2.css" rel="stylesheet" />
+<script src="dev/js/mobiscroll.wp-2.6.2.js"></script>
+<link href="dev/css/mobiscroll.wp-2.6.2.css" rel="stylesheet" />
+<!--Includes-->
+
+<style type="text/css">
+body {
+	padding: 0;
+	margin: 0;
+	font-family: arial, verdana, sans-serif;
+	font-size: 12px;
+	background: #ddd;
+}
+
+input, select {
+	width: 100%;
+	padding: 5px;
+	margin: 5px 0;
+	border: 1px solid #aaa;
+	box-sizing: border-box;
+	border-radius: 5px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-webkit-border-radius: 5px;
+}
+
+.header {
+	border: 1px solid #333;
+	background: #111;
+	color: white;
+	font-weight: bold;
+	text-shadow: 0 -1px 1px black;
+	background-image: linear-gradient(#3C3C3C, #111);
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#3C3C3C),
+		to(#111));
+	background-image: -moz-linear-gradient(#3C3C3C, #111);
+}
+
+.header h1 {
+	text-align: center;
+	font-size: 16px;
+	margin: .6em 0;
+	padding: 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.content {
+	padding: 15px;
+	background: #fff;
+}
+
+.car {
+	position: relative;
+	height: 100%;
+}
+
+.car img {
+	height: 28px;
+	display: block;
+	margin: 0 auto;
+}
+
+.car .img-cont {
+	width: 80px;
+	height: 28px;
+	text-align: center;
+	float: left;
+	position: relative;
+	top: 50%;
+	margin-top: -14px;
+}
+
+.car span {
+	float: left;
+}
+
+.dwwr {
+	
+}
+</style>
+
+<script type="text/javascript">
+	$(function() {
+		var curr = new Date().getFullYear();
+		var opt = {
+
+		}
+		opt.date = {
+			preset : 'date'
+		};
+		opt.time = {
+			preset : 'time'
+		};
+		opt.select = {
+			preset : 'select'
+		};
+		<!--Script-->
+
+		$('select.changes').bind(
+				'change',
+				function() {
+					$(".demos").hide();
+					$("#demo_default").show();
+					$("#demo_default2").show();
+					$("#demo_default3").show();
+					$('#test_default').val('').scroller('destroy').scroller(
+							$.extend(opt['date'], {
+								theme : "default",
+								mode : "scroller",
+								display : "Modal",
+								lang : "zh"
+							}));
+					$('#test_default2').val('').scroller('destroy').scroller(
+							$.extend(opt['time'], {
+								theme : "default",
+								mode : "scroller",
+								display : "Modal",
+								lang : "zh"
+							}));
+					$('#test_default3').val('').scroller('destroy').scroller(
+							$.extend(opt['time'], {
+								theme : "default",
+								mode : "scroller",
+								display : "Modal",
+								lang : "zh"
+							}));
+
+				});
+
+		$('#demo').trigger('change');
+	});
+</script>
+</head>
+
+<body>
+	<div class="header">
+		<h1>Mobiscroll</h1>
+	</div>
+
+	<div class="content">
+		<div id="demo_default" class="demos" style="width: 100px">
+			<label for="test_default">Click here to try</label> <input
+				type="text" name="test_default" id="test_default" /> <label
+				for="test_default2">Click here to try</label> <input type="text"
+				name="test_default" id="test_default2" /> <label
+				for="test_default3">Click here to try</label> <input type="text"
+				name="test_default" id="test_default3" />
+		</div>
+		<!--Html-->
+	</div>
+</body>
+</html>

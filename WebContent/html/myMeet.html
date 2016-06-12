@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.sta_can {
+	background-color: #F7F7F7;
+}
+
+.sta_can>.m_state {
+	color: #BABABA;
+}
+
+.sta_draft {
+	background-color: #F7F7F7;
+}
+
+.sta_draft>.m_state {
+	color: #BABABA;
+}
+
+.sta_noRun {
+	background-color: #F4FBF3;
+}
+
+.sta_noRun>.m_state {
+	color: #1CB51E;
+}
+
+.sta_run {
+	background-color: #FCF3F4;
+}
+
+.sta_run>.m_state {
+	color: #FF6766;
+}
+
+.sta_over {
+	
+}
+
+.m_can {
+	display: inline-block;
+	position: absolute;
+	right: 10px;
+	top: 60px;
+	background-color: #018AD2;
+	color: white;
+	padding: 3px;
+	width: 70px;
+	border-radius: 6px;
+	text-align: center;
+	z-index:5;
+}
+.m_day {
+	font-size: 16px;
+}
+</style>
+</head>
+<body>
+	<div class="i_head">
+		<span class="i_head_center">会议助手</span>
+	</div>
+	<div class="i_body">
+		<div class="i_nav">
+			<div class="i_nav_top">
+				<div class="i_nav_Icon">
+					<img src="img/i_allMeet_1.png" class="i_navImg"
+						onclick="loadPage('index.html')">
+					<div>全部会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_0.png" class="i_navImg"
+						onclick="loadPage('myMeet.html')">
+					<div>我的会议</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('fileList.html')">
+					<div>文件管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_myMeet_1.png" class="i_navImg"
+						onclick="loadPage('roomList.html')">
+					<div>会议室管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('userList.html')">
+					<div>用户管理</div>
+				</div>
+				<div class="i_nav_Icon">
+					<img src="img/i_fileBg_1.png" class="i_navImg"
+						onclick="loadPage('addMeet.html')">
+					<div>发起会议</div>
+				</div>
+			</div>
+		</div>
+		<div class="i_main">
+			<div class="m_list">
+				<div class="m_head">
+					<div class="m_select">
+						<select onchange="init()" id="m_select">
+							<option value="">选择会议状态</option>
+							<option value="draft">草稿</option>
+							<option value="noRun">未开始</option>
+							<option value="run">进行中</option>
+							<option value="over">已结束</option>
+							<option value="can">已取消</option>
+						</select><img src="img/m_down.png" class="m_downImg">
+					</div>
+					<span class="m_textGroup"><span class="m_text"
+						contenteditable="true"></span><img src="img/m_search.png"
+						class="m_downImg" onclick="init()"></span>
+				</div>
+				<div class="m_main" id="m_main"></div>
+			</div>
+		</div>
+	</div>
+</body>
+<script id="meet_t" type="text/x-jquery-tmpl">
+<div class="m_item">
+				<div class="m_title">{{html $item.getDate(date)}}</div>
+{{each(index,obj) list}}
+				<div class="m_subItem" >
+					<div class="m_sub sta_${status}" onclick="meetInfo(${obj.id})">
+						<div class="m_time m_subTitle">${obj.startTime}-${obj.endTime}</div>
+						<div class="m_state">${$item.getStatus(status)}</div>
+						<div style="clear: both"></div>
+					</div>
+					<div class="m_sub">
+						<span class="m_subTitle">会议主题</span><span class="m_subContent">${methem}</span>
+                        <div class="all_clear"></div>
+					</div>
+                    <span class="m_can" {{html $item.isCan(status)}} onclick="canMeet(${obj.id})">取消</span>
+					<div class="m_sub">
+						<span class="m_subTitle">参会人员</span><span class="m_subContent">${join}</span>
+					<div class="all_clear"></div>
+                     </div>
+				</div>
+{{/each}}
+			</div>
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script src="js/myMeet.js"></script>
+</html>
