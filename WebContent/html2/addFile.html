@@ -68,60 +68,19 @@ input {
 </style>
 </head>
 <body>
-	<div class="i_head">
-		<span class="i_head_center">会议助手</span>
-	</div>
-	<div class="i_body">
-		<div class="i_nav">
-			<div class="i_nav_top">
-				<div class="i_nav_Icon">
-					<img src="img/i_allMeet_1.png" class="i_navImg"
-						onclick="loadPage('index.html')">
-					<div>全部会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('myMeet.html')">
-					<div>我的会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_0.png" class="i_navImg"
-						onclick="loadPage('fileList.html')">
-					<div>文件管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('roomList.html')">
-					<div>会议室管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('userList.html')">
-					<div>用户管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('addMeet.html')">
-					<div>发起会议</div>
-				</div>
+	<div class="mi_body">
+		<div class="mi_head">添加会议文件</div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">上传文件</span><span class="mi_btn">上传本地文件</span><input
+					type="file" class="mi_inputFile " onchange="readFile(this)"
+					accept=".xls,.xlsx,.txt,.pdf,.doc,.docx,.ppt,.pptx"></input> <span
+					class="f_showName"></span>
 			</div>
 		</div>
-		<div class="i_main">
-			<div class="mi_body">
-				<div class="mi_head">添加会议文件</div>
-				<div class="mi_main">
-					<div class="mi_item">
-						<span class="mi_name">上传文件</span><span class="mi_btn">上传本地文件</span><input
-							type="file" class="mi_inputFile " onchange="readFile(this)"
-							accept=".xls,.xlsx,.txt,.pdf,.doc,.docx,.ppt,.pptx"></input> <span
-							class="f_showName"></span>
-					</div>
-				</div>
-				<div class="mi_bottom">
-					<span class="mi_save mi_btn" onclick="save()">保存文件</span> <span
-						class="mi_send mi_btn" onclick="back()">返回</span>
-				</div>
-			</div>
+		<div class="mi_bottom">
+			<span class="mi_save mi_btn" onclick="save()">保存文件</span> <span
+				class="mi_send mi_btn" onclick="back()">返回</span>
 		</div>
 	</div>
 </body>
@@ -129,7 +88,7 @@ input {
 <script src="js/base.js"></script>
 <script>
 	function back() {
-		history.back();
+		loadPage("fileList.html");
 	}
 	var fileObj = {};
 	function readFile(obj) {
@@ -144,10 +103,10 @@ input {
 		}
 	}
 	function save() {
-		var type=$.getUrlVar("type");
+		var type = $.getUrlVar("type");
 		ajaxPost(fileObj, "upFile.do", function(data) {
 			if (data.code == 1) {
-				loadPage("fileList.html?type="+type);
+				loadPage("fileList.html?type=" + type);
 			}
 		})
 	}

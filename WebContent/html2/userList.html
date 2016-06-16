@@ -99,7 +99,7 @@ body {
 .d_openImg {
 	position: absolute;
 	right: 10px;
-	top:-6px;
+	top: -6px;
 }
 
 .d_num {
@@ -131,65 +131,24 @@ body {
 </style>
 </head>
 <body>
-	<div class="i_head">
-		<span class="i_head_center">会议助手</span>
-	</div>
-	<div class="i_body">
-		<div class="i_nav">
-			<div class="i_nav_top">
-				<div class="i_nav_Icon">
-					<img src="img/i_allMeet_1.png" class="i_navImg"
-						onclick="loadPage('index.html')">
-					<div>全部会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('myMeet.html')">
-					<div>我的会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('fileList.html')">
-					<div>文件管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('roomList.html')">
-					<div>会议室管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_0.png" class="i_navImg"
-						onclick="loadPage('userList.html')">
-					<div>用户管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('addMeet.html')">
-					<div>发起会议</div>
-				</div>
+	<div class="m_list">
+		<div class="m_head">
+			<span class="f_back" onclick="history.back()">返回</span>
+			<div class="m_select">
+				<select onchange="reload()" id="select">
+					<option value="">用户角色</option>
+					<option value="all">系统管理员</option>
+					<option value="manager">普通管理员</option>
+					<option value="user">普通用户</option>
+				</select><img src="img/m_down.png" class="m_downImg">
 			</div>
+			<span class="m_textGroup"><span class="m_text"
+				contenteditable="true"></span><img src="img/m_search.png"
+				onclick="reload()" class="m_downImg"></span> <span class="r_add"
+				onclick="synUser()">同步用户</span><span class="f_back f_ok"
+				onclick="select()">选择确认</span>
 		</div>
-		<div class="i_main">
-			<div class="m_list">
-				<div class="m_head">
-					<span class="f_back" onclick="history.back()">返回</span>
-					<div class="m_select">
-						<select onchange="reload()" id="select">
-							<option value="">用户角色</option>
-							<option value="all">系统管理员</option>
-							<option value="manager">普通管理员</option>
-							<option value="user">普通用户</option>
-						</select><img src="img/m_down.png" class="m_downImg">
-					</div>
-					<span class="m_textGroup"><span class="m_text"
-						contenteditable="true"></span><img src="img/m_search.png"
-						onclick="reload()" class="m_downImg"></span> <span class="r_add"
-						onclick="synUser()">同步用户</span><span class="f_back f_ok"
-						onclick="select()">选择确认</span>
-				</div>
-				<div class="f_main" id="f_main"></div>
-			</div>
-		</div>
+		<div class="f_main" id="f_main"></div>
 	</div>
 </body>
 <script id="depart_t" type="text/x-jquery-tmpl">

@@ -57,6 +57,7 @@ public class GOauth2Core {
 		url = url.replace("ACCESS_TOKEN", access_token).replace("CODE", code).replace("AGENTID", agentid);
 		JSONObject jsonobject = WeixinUtil.HttpRequest(url, "GET", null);
 		if (null != jsonobject) {
+			System.out.println(jsonobject);
 			UserId = jsonobject.getString("UserId");
 			if (!"".equals(UserId)) {
 				System.out.println("获取信息成功，o(∩_∩)o ————UserID:" + UserId);

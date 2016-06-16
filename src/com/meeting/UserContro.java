@@ -56,6 +56,7 @@ public class UserContro {
 		AllUserList u = new AllUserList();
 		JSONObject ret = u.getUserList();
 		JSONArray department = ret.optJSONArray("department");
+		System.out.println(department);
 		for (int i = 0; i < department.length(); i++) {
 			JSONObject object = department.optJSONObject(i);
 			JSONObject user = new JSONObject();

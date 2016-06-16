@@ -16,15 +16,17 @@ $(".mi_input").blur(function() {
 $(".mi_input").trigger("blur");
 function selectRoom() {
 	dataBuffer();
-	location.href = "roomList.html?type=select";
+	loadPage("roomList.html?type=select", {
+		type : "select"
+	});
 }
 function addFile() {
 	dataBuffer();
-	location.href = "fileList.html?type=select";
+	loadPage("fileList.html?type=select");
 }
 function addUser() {
 	dataBuffer();
-	location.href = "userList.html?type=select";
+	loadPage("userList.html?type=select");
 }
 function dataBuffer() {
 	var param = {

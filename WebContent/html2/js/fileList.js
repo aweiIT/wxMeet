@@ -1,11 +1,12 @@
 function upFile() {
-	location.href = "addFile.html?type=select";
+	//location.href = "addFile.html?type=select";
+	loadPage("addFile.html?type=select");
 }
 var type = $.getUrlVar("type");
 function init(param) {
 	if (type == "select") {
 		$(".f_back").css("display", "inline-block");
-		//$(".f_headUp").hide();
+		// $(".f_headUp").hide();
 	}
 	$("#f_main").children().remove();
 	ajaxPost(param, "fileList.do", function(data) {
@@ -41,5 +42,6 @@ function select() {
 		}
 	});
 	localStorage.s_file = JSON.stringify(s_file);
-	 location.href = "addMeet.html?type=back";
+	loadPage("addMeet.html?type=back");
+	//location.href = "";
 }

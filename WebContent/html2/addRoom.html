@@ -8,65 +8,24 @@
 <link href="css/index.css" rel="stylesheet">
 </head>
 <body>
-	<div class="i_head">
-		<span class="i_head_center">会议助手</span>
-	</div>
-	<div class="i_body">
-		<div class="i_nav">
-			<div class="i_nav_top">
-				<div class="i_nav_Icon">
-					<img src="img/i_allMeet_1.png" class="i_navImg"
-						onclick="loadPage('index.html')">
-					<div>全部会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('myMeet.html')">
-					<div>我的会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('fileList.html')">
-					<div>文件管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_0.png" class="i_navImg"
-						onclick="loadPage('roomList.html')">
-					<div>会议室管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('userList.html')">
-					<div>用户管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('addMeet.html')">
-					<div>发起会议</div>
-				</div>
+	<div class="mi_body">
+		<div class="mi_head">添加会议室</div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">会议室</span>
+				<div class="mi_input" contenteditable="true" str="填写会议室" id="name"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">位置</span>
+				<div class="mi_input" contenteditable="true" str="填写会议室位置"
+					id="address"></div>
+				<div class="all_clear"></div>
 			</div>
 		</div>
-		<div class="i_main">
-			<div class="mi_body">
-				<div class="mi_head">添加会议室</div>
-				<div class="mi_main">
-					<div class="mi_item">
-						<span class="mi_name">会议室</span>
-						<div class="mi_input" contenteditable="true" str="填写会议室" id="name"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">位置</span>
-						<div class="mi_input" contenteditable="true" str="填写会议室位置"
-							id="address"></div>
-						<div class="all_clear"></div>
-					</div>
-				</div>
-				<div class="mi_bottom">
-					<span class="mi_save mi_btn" onclick="save()">保存</span> <span
-						class="mi_send mi_btn" onclick="history.back()">返回</span>
-				</div>
-			</div>
+		<div class="mi_bottom">
+			<span class="mi_save mi_btn" onclick="save()">保存</span> <span
+				class="mi_send mi_btn" onclick="roomBack()">返回</span>
 		</div>
 	</div>
 </body>
@@ -93,7 +52,7 @@
 			address : $("#address").text()
 		}, "saveRoom.do", function(data) {
 			if (data.code == 1) {
-				location.href = "roomList.html";
+				loadPage("roomList.html");
 			}
 		})
 	}
@@ -110,5 +69,8 @@
 		}
 	});
 	$(".mi_input").trigger("blur");
+	function roomBack() {
+		loadPage("roomList.html");
+	}
 </script>
 </html>

@@ -23,94 +23,53 @@
 </style>
 </head>
 <body>
-	<div class="i_head">
-		<span class="i_head_center">会议助手</span>
-	</div>
-	<div class="i_body">
-		<div class="i_nav">
-			<div class="i_nav_top">
-				<div class="i_nav_Icon">
-					<img src="img/i_allMeet_0.png" class="i_navImg"
-						onclick="loadPage('index.html')">
-					<div>全部会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('myMeet.html')">
-					<div>我的会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('fileList.html')">
-					<div>文件管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('roomList.html')">
-					<div>会议室管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('userList.html')">
-					<div>用户管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('addMeet.html')">
-					<div>发起会议</div>
-				</div>
+	<div class="mi_body">
+		<div class="mi_back" onclick="meetInfo()">返回</div>
+		<div class="mi_head" id="methem"></div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">会议状态</span>
+				<div class="mi_input" id="status"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议室</span>
+				<div class="mi_input" id="room"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议日期</span>
+				<div class="mi_input" id="date"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议时间</span> <input type="text" id="startTime"
+					readonly="readonly"></input><span class="mi_zhi">至</span><input
+					type="text" id="endTime" readonly="readonly"></input>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">发起人</span>
+				<div class="mi_input" id="set"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">被邀参会人</span>
+				<div class="mi_input" id="join"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">会议说明</span>
+				<div class="mi_input" id="desc"></div>
+				<div class="all_clear"></div>
 			</div>
 		</div>
-		<div class="i_main">
-			<div class="mi_body">
-				<div class="mi_back" onclick="history.back()">返回</div>
-				<div class="mi_head" id="methem"></div>
-				<div class="mi_main">
-					<div class="mi_item">
-						<span class="mi_name">会议状态</span>
-						<div class="mi_input" id="status"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">会议室</span>
-						<div class="mi_input" id="room"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">会议日期</span>
-						<div class="mi_input" id="date"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">会议时间</span> <input type="text"
-							id="startTime" readonly="readonly"></input><span class="mi_zhi">至</span><input
-							type="text" id="endTime" readonly="readonly"></input>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">发起人</span>
-						<div class="mi_input" id="set"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">被邀参会人</span>
-						<div class="mi_input" id="join"></div>
-						<div class="all_clear"></div>
-					</div>
-					<div class="mi_item">
-						<span class="mi_name">会议说明</span>
-						<div class="mi_input" id="desc"></div>
-						<div class="all_clear"></div>
-					</div>
-				</div>
-				<div class="mi_head">
-					会议文件
-					<div style="clear: both"></div>
-				</div>
-				<div class="mi_file">
-					<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
-				</div>
-			</div>
+		<div class="mi_head">
+			会议文件
+			<div style="clear: both"></div>
+		</div>
+		<div class="mi_file">
+			<div class="mi_clear" style="clear: both" id="mi_fileClear"></div>
 		</div>
 	</div>
 </body>
@@ -171,6 +130,9 @@
 			can : "已取消"
 		}
 		return staObj[status];
+	}
+	function meetInfo() {
+		location.href = "index.html";
 	}
 </script>
 </html>

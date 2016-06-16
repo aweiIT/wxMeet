@@ -3,6 +3,7 @@ function addRoom(id) {
 }
 var type = $.getUrlVar("type");
 function init(param) {
+	console.log(location.href);
 	if (type == "select") {
 		$(".f_back").css("display", "inline-block");
 		$(".r_add").hide();
