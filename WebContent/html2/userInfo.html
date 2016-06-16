@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Insert title here</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+.mi_back {
+	margin-bottom: 20px;
+	width: 75px;
+	text-align: center;
+	background-color: #015293;
+	color: white;
+	border-radius: 6px;
+	padding: 6px;
+}
+</style>
+</head>
+<body>
+	<div class="mi_body">
+		<div class="mi_back" onclick="history.back()">返回</div>
+		<div class="mi_head" id="methem">用户资料</div>
+		<div class="mi_main">
+			<div class="mi_item">
+				<span class="mi_name">用户名</span>
+				<div class="mi_input" id="name"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">所属部门</span>
+				<div class="mi_input" id="depart"></div>
+				<div class="all_clear"></div>
+			</div>
+			<div class="mi_item">
+				<span class="mi_name">管理员</span> <input type="checkbox" id="role">
+				<div class="all_clear"></div>
+			</div>
+		</div>
+		<div class="mi_bottom">
+			<span class="mi_back mi_btn" onclick="save()">保存</span> <span
+				class="mi_back mi_btn">返回</span>
+		</div>
+	</div>
+</body>
+<script src="laydate/laydate.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script>
+	var user = JSON.parse(localStorage.user);
+	function init() {
+		$("#name").text(user.name);
+		$("#depart").text(user.depart);
+		if (user.role == "manager") {
+			$("#role").attr("checked", "true");
+		}
+	}
+	init();
+	function save() {
+		var param = {
+			id : user.id,
+			role : "user"
+		}
+		if ($("#role").prop("checked")) {
+			param.role = "manager";
+		}
+		ajaxPost(param, "saveUser.do", function(data) {
+			if (data.code == 1) {
+				location.href = "userList.html";
+			}
+		})
+	}
+</script>
+</html>

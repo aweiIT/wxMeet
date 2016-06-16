@@ -96,6 +96,7 @@ public class MeetContro {
 		}
 		JSONObject msg = new JSONObject();
 		msg.put("code", "1");
+		msg.put("obj", in);
 		HttpUtil.write(response, msg.toString());
 	}
 
@@ -112,13 +113,20 @@ public class MeetContro {
 		}
 		if (!status.equals("")) {
 			where.put("status", status);
+		} else {
+			if (in.optString("type").equals("meetList")) {
+				List<Object> condlist = new ArrayList<Object>();
+				condlist.add("noRun");
+				condlist.add("run");
+				condlist.add("over");
+				where.put("status", dbcall.getin(condlist));
+			}
 		}
 		if (!methem.equals("")) {
 			where.put("methem", dbcall.getLikeStr(methem));
 		}
 		JSONArray list = Mongodbtools
 				.DBlist2JSONArray(dbcall.group(new BasicDBObject("date", 1), where, null, null, null));
-
 		List<Object> dateList = new ArrayList<Object>();
 		JSONObject dateObj = new JSONObject();
 		for (int i = 0; i < list.length(); i++) {
@@ -149,7 +157,7 @@ public class MeetContro {
 
 	JSONObject checkStatus(JSONObject object) {
 		String status = object.optString("status");
-		if (!status.equals("noRun") && !status.equals("draft")) {
+		if (!status.equals("noRun") && !status.equals("draft")&& !status.equals("run")) {
 			return object;
 		}
 
@@ -159,6 +167,7 @@ public class MeetContro {
 		long start = DateUtil.String2Date(startTime, "yyyy-MM-dd HH:mm").getTime();
 		long end = DateUtil.String2Date(entTime, "yyyy-MM-dd HH:mm").getTime();
 		long now = System.currentTimeMillis();
+		System.out.println(start + "--" + end + "---" + status);
 		if (start < now && status.equals("draft")) {
 			object.put("status", "can");
 			task(object.optString("id"), "can");
@@ -169,11 +178,17 @@ public class MeetContro {
 			task(object.optString("id"), "run");
 			return object;
 		}
+		if (end < now && status.equals("run")) {
+			object.put("status", "over");
+			task(object.optString("id"), "over");
+			return object;
+		}
 		if (end < now) {
 			object.put("status", "can");
 			task(object.optString("id"), "can");
 			return object;
 		}
+
 		return object;
 	}
 

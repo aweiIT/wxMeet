@@ -38,7 +38,7 @@ function loadPage(href, e) {
 	}
 	location.href = href;
 }
-function sort(arr, key) {//排序JSON
+function sort(arr, key) {// 排序JSON
 	arr = arr.sort(function(a, b) {
 		var x = a[key];
 		var y = b[key];
@@ -46,3 +46,13 @@ function sort(arr, key) {//排序JSON
 	});
 	return arr;
 }
+$(".i_nav_top").load("m_left.html", function() {
+	var pageID = $.getUrlVar("pageID");
+	if (pageID) {
+		var div = $($(".i_nav_Icon :eq(" + pageID + ") img"));
+		var src = div.attr("src");
+		var arrs = src.split("_");
+		div.attr("src", arrs[0] + "_" + arrs[1] + "_" + "0.png");
+	}
+
+});

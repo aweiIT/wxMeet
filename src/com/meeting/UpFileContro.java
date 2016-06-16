@@ -66,8 +66,8 @@ public class UpFileContro {
 	void writeFile(String path, String name, String str) {
 
 		String type = name.split("\\.")[1];
-		type = getType(type);
-		String fileName = DateUtil.getNow("yyyyMMddHHmmss") + new Random().nextInt(100) + "." + type;
+
+		String fileName = DateUtil.getNow("yyyyMMddHHmmss") + new Random().nextInt(100) + "." + getType(type, 0);
 		FileOutputStream out = null;
 		try {
 			out = new FileOutputStream(new File(path + fileName));
@@ -81,27 +81,37 @@ public class UpFileContro {
 		DbAgent dbcall = new DbAgent("onecooo", "wx_file");
 		JSONObject object = new JSONObject();
 		object.put("id", dbcall.getObjidstr("fileID"));
-		object.put("type", type);
+		object.put("type", getType(type, 1));
 		object.put("name", name.split("\\.")[0]);
 		object.put("upDate", DateUtil.getNow("yyyy-MM-dd HH:mm"));
 		object.put("nowUrl", "/wxmeet/uploads/" + fileName);
 		dbcall.add(object);
 	}
 
-	String getType(String type) {
+	String getType(String type, int value) {
 		if (type.toLowerCase().contains("doc") || type.toLowerCase().contains("docx")) {
+			if (value == 1)
+				return "doc";
 			return "docx";
 		}
 		if (type.toLowerCase().contains("xls") || type.toLowerCase().contains("xlsx")) {
+			if (value == 1)
+				return "xls";
 			return "xlsx";
 		}
 		if (type.toLowerCase().contains("pdf")) {
+			if (value == 1)
+				return "pdf";
 			return "pdf";
 		}
 		if (type.toLowerCase().contains("ppt") || type.toLowerCase().contains("pptx")) {
-			return "ppt";
+			if (value == 1)
+				return "ppt";
+			return "pptx";
 		}
 		if (type.toLowerCase().contains("txt")) {
+			if (value == 1)
+				return "txt";
 			return "txt";
 		}
 		return "";

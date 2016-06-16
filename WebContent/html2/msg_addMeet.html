@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>会议通知</title>
+<link href="css/index.css" rel="stylesheet">
+<style type="text/css">
+body {
+	width: 100%;
+	height: 100%;
+}
+
+.msg_item {
+	margin: 8px;
+}
+
+.msg_title {
+	width: 60px;
+	display: inline-block;
+}
+
+.msg_main {
+	display: none;
+	margin: 10% auto;
+	width: 250px;
+	border: 1px solid gray;
+	padding: 8px;
+	border-radius: 5px;
+}
+
+.msg_set {
+	margin-right:6px;
+}
+</style>
+</head>
+<body>
+	<div class="msg_main msg_add">
+		<div class="msg_item">您收到一个会议邀请</div>
+		<div class="msg_item">
+			<span class="msg_title">发起人:</span><span id="set" class=""></span>
+		</div>
+		<div class="msg_item">
+			<span class="msg_title">主题:</span><span id="methem" class=""></span>
+		</div>
+		<div class="msg_item">
+			<span class="msg_title">时间:</span><span id="meetTime" class=""></span>
+		</div>
+		<div class="msg_item">
+			<span class="msg_title">地点:</span><span id="meetAddress" class=""></span>
+		</div>
+		<div class="msg_item">查看会议详情并下载会议资料 >></div>
+	</div>
+	<div class="msg_main msg_can">
+		<span class="msg_set"></span>取消了主题为<span class="msg_methem"></span>的会议邀请。
+		您可以联系<span class="msg_set"></span>了解更多信息。
+	</div>
+</body>
+<script src="js/jquery.js"></script>
+<script src="js/jquery.tmpl.js"></script>
+<script src="js/base.js"></script>
+<script>
+	function init() {
+		var id = $.getUrlVar("id");
+		var type = $.getUrlVar("type");
+		ajaxPost({
+			id : id
+		}, "getMeet.do", function(data) {
+			if (type == "add") {
+				$(".msg_add").show();
+				$("#set").text(
+						data.createUser.departName + "--"
+								+ data.createUser.name);
+				$("#methem").text(data.methem);
+				$("#meetTime")
+						.text(
+								data.date + "   " + data.startTime + "-"
+										+ data.endTime);
+				$("#meetAddress").text(data.address);
+			}
+			if (type == "can") {
+				$(".msg_can").show();
+				$(".msg_set").text(
+						data.createUser.departName + "--"
+								+ data.createUser.name);
+				$(".msg_methem").text(data.methem);
+			}
+		})
+	}
+	init();
+</script>
+
+</html>

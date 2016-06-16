@@ -132,36 +132,6 @@ input, select {
 	<div class="i_body">
 		<div class="i_nav">
 			<div class="i_nav_top">
-				<div class="i_nav_Icon">
-					<img src="img/i_allMeet_1.png" class="i_navImg"
-						onclick="loadPage('index.html')">
-					<div>全部会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('myMeet.html')">
-					<div>我的会议</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('fileList.html')">
-					<div>文件管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_myMeet_1.png" class="i_navImg"
-						onclick="loadPage('roomList.html')">
-					<div>会议室管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_1.png" class="i_navImg"
-						onclick="loadPage('userList.html')">
-					<div>用户管理</div>
-				</div>
-				<div class="i_nav_Icon">
-					<img src="img/i_fileBg_0.png" class="i_navImg"
-						onclick="loadPage('addMeet.html')">
-					<div>发起会议</div>
-				</div>
 			</div>
 		</div>
 		<div class="i_main">
@@ -217,7 +187,8 @@ input, select {
 				</div>
 				<div class="mi_bottom">
 					<span class="mi_save mi_btn" onclick="saveMeet()">保存会议</span> <span
-						class="mi_send mi_btn">发布会议</span> <span class="mi_con">发布会议，同时向参会人员发布通知</span>
+						onclick="sendMeet()" class="mi_send mi_btn">发布会议</span> <span
+						class="mi_con">发布会议，同时向参会人员发布通知</span>
 				</div>
 			</div>
 		</div>
@@ -225,7 +196,7 @@ input, select {
 </body>
 <script id="file_t" type="text/x-jquery-tmpl">
 <div class="mi_fileItem">
-<img src="img/file_${type}.png" class="mi_fileImg">
+<a href="${nowUrl}"><img src="img/file_${type}.png" class="mi_fileImg"></a>
 <div class="mi_fileName">${$item.getName(name)}</div>
 <div class="mi_del" onclick="delFile('${id}',this)">删除</div> 
 <div class="all_clear"></div>
@@ -261,14 +232,18 @@ input, select {
 			month = "0" + month;
 		}
 		var dateStr = date.getFullYear() + "-" + month + "-" + date.getDate();
-		var timeStr = date.getHours() + ":" + date.getMinutes();
 		var param = JSON.parse(localStorage.meet);
-		log(param);
 		if (param.date)
 			dateStr = param.date;
 		$('#date').val(dateStr).scroller('destroy').scroller(opt);
 		opt.preset = "time";
-		var endTime = (date.getHours() + 1) + ":" + date.getMinutes();
+		opt.minDate = "";
+		var hour = date.getHours();
+		var minute = date.getMinutes();
+		var timeStr = (hour < 10 ? ("0" + hour) : hour) + ":"
+				+ (minute < 10 ? ("0" + minute) : minute);
+		var endTime = (hour < 9 ? ("0" + (hour + 1)) : (hour + 1)) + ":"
+				+ (minute < 10 ? ("0" + minute) : minute);
 		if (param.startTime)
 			timeStr = param.startTime;
 		if (param.endTime)
@@ -277,5 +252,8 @@ input, select {
 		$('#endTime').val(endTime).scroller('destroy').scroller(opt);
 
 	});
+	function changeDate() {
+		alert();
+	}
 </script>
 </html>
